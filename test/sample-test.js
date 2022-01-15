@@ -16,18 +16,18 @@ describe("NFT market", function () {
     let listingPrice = await market.getListingPrice()
     listingPrice = listingPrice.toString()
     // remember this is in MATIC not ETH
-    const auctionPrice = ethers.utils.parseUnits('100', 'ether')
+    const auctionPrice = ethers.utils.parseUnits('1', 'ether')
 
     await nft.createToken("https://www.mytokenlocation.com")
     await nft.createToken("https://www.mytokenlocation2.com")
-
+  
     await market.createMarketItem(nftContractAddress, 1, auctionPrice, { value: listingPrice })
     await market.createMarketItem(nftContractAddress, 2, auctionPrice, { value: listingPrice })
 
     // first address is "_" becouse it is actually seller. By default first address is use to create saller for contracts
     const [_, buyerAddress] = await ethers.getSigners()
 
-    await market.connect(buyerAddress).createMarketSale(nftContractAddress, 1, { value: listingPrice})
+    await market.connect(buyerAddress).createMarketSale(nftContractAddress, 1, { value: auctionPrice})
 
 
     const items  = await market.fetchMarketItems();
