@@ -1,5 +1,6 @@
 {
-  "name": "tutorial-nft-market",
+  "name": "polygon-next",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -13,6 +14,7 @@
     "@openzeppelin/contracts": "^4.4.1",
     "axios": "^0.24.0",
     "chai": "^4.3.4",
+    "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.3",
     "hardhat": "^2.8.2",
     "ipfs-http-client": "^55.0.0",
@@ -22,10 +24,10 @@
     "web3modal": "^1.9.5"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
-    "eslint": "8.6.0",
-    "eslint-config-next": "12.0.7",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.12"
+    "autoprefixer": "^10.2.6",
+    "eslint": "7.29.0",
+    "eslint-config-next": "11.0.1",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4"
   }
 }
