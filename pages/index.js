@@ -24,7 +24,9 @@ export default function Home() {
     const provider = new ethers.providers.JsonRpcProvider()
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
-
+    console.log('marketContract',marketContract)
+    
+    
     const data = await marketContract.fetchMarketItems()
 
     const items = await Promise.all(data.map(async i => {

@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("hardhat-tracer");
 const fs = require("fs");
 const privateKey = fs.readFileSync(".secret").toString();
 const projectId =  "cec2292f55624ad19c5e881eeb40539e";

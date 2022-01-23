@@ -4,6 +4,7 @@ pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "hardhat/console.sol";
 
 contract NFTMarket is ReentrancyGuard {
     using Counters for Counters.Counter;
@@ -29,7 +30,7 @@ contract NFTMarket is ReentrancyGuard {
 
     mapping(uint256 => MarketItem) private idToMarketItem;
 
-    event MarketItemCreated (
+    event MarketItemCreated(
         uint indexed itemId,
         address indexed nftContract,
         uint256 indexed tokenId,
@@ -66,7 +67,7 @@ contract NFTMarket is ReentrancyGuard {
         //tranfer ownership of nftContract from sender to marketplace itself
         IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
 
-        emit MarketItemCreated (
+        emit MarketItemCreated(
             itemId,
             nftContract,
             tokenId,
@@ -101,14 +102,13 @@ contract NFTMarket is ReentrancyGuard {
         uint itemCount = _itemIds.current();
         uint unsoldItemCount = _itemIds.current() - _itemsSold.current();
         uint currentIndex = 0;
-
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);
-        for(uint i = 0; i < itemCount; i++) {
-            if(idToMarketItem[i + 1].owner == address(0)) {
+        for (uint i = 0; i < itemCount; i++) {
+            if (idToMarketItem[i + 1].owner == address(0)) {
                 uint currentId = idToMarketItem[i + 1].itemId;
-                MarketItem storage item = idToMarketItem[currentId];
-                items[currentIndex] = item;
-                currentIndex++;
+                MarketItem storage currentItem = idToMarketItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
             }
         }
 

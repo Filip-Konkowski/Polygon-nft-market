@@ -18,7 +18,7 @@ describe("NFT market", function () {
     // remember this is in MATIC not ETH
     const auctionPrice = ethers.utils.parseUnits('1', 'ether')
 
-    await nft.createToken("https://www.mytokenlocation.com")
+    await nft.createToken("https://www.mytokenlocation1.com")
     await nft.createToken("https://www.mytokenlocation2.com")
   
     await market.createMarketItem(nftContractAddress, 1, auctionPrice, { value: listingPrice })
@@ -28,7 +28,6 @@ describe("NFT market", function () {
     const [_, buyerAddress] = await ethers.getSigners()
 
     await market.connect(buyerAddress).createMarketSale(nftContractAddress, 1, { value: auctionPrice})
-
 
     let items  = await market.fetchMarketItems();
 
@@ -43,6 +42,6 @@ describe("NFT market", function () {
       }
       return item;
     }))
-    console.log(items)
+    console.log('items: ', items)
   });
 });

@@ -19,7 +19,6 @@ export default function CreateItem() {
       const [fileUrl, setFileUrl] = useState(null)
       const [formInput, updateFormInput] = useState({ price: '', name: '', description: ''})
       const router = useRouter()
-      console.log('router', router)
 
       async function onChange(e) {
         const file = e.target.files[0]
@@ -64,7 +63,9 @@ export default function CreateItem() {
         let transaction = await contract.createToken(url)
         let tx = await transaction.wait()
 
+        console.log('tx' ,tx)
         let event = tx.events[0]
+        console.log('event', event)
         let value = event.args[2]
         let tokenId = value.toNumber()
 
@@ -78,7 +79,6 @@ export default function CreateItem() {
         )
 
         await transaction.wait()
-        console.log('router',router)
         router.push('/')
     }
 
